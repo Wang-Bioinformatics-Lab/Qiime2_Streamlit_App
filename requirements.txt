@@ -2,3 +2,16 @@ streamlit
 pandas
 requests
 plotly
+vaex
+xmltodict
+pymzml
+plotnine
+pyteomics
+numpy
+scikit-learn
+scikit-bio
+pingouin
+kaleido
+ipyfilechooser
+nbformat
+pynmranalysis

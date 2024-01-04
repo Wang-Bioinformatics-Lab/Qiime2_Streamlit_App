@@ -11,9 +11,19 @@ ENV PATH=$CONDA_DIR/bin:$PATH
 # Adding to bashrc
 RUN echo "export PATH=$CONDA_DIR:$PATH" >> ~/.bashrc
 
-COPY requirements.txt .
-RUN pip install -r requirements.txt
-RUN pip install git+https://github.com/Wang-Bioinformatics-Lab/GNPSDataPackage.git
+# Installing Qiime2
+RUN wget https://data.qiime2.org/distro/core/qiime2-2023.2-py38-linux-conda.yml
+RUN mamba env create -n qiime2 --file qiime2-2023.2-py38-linux-conda.yml
+
+COPY requirements.txt /
+RUN /bin/bash -c ". activate qiime2 && pip install -r /requirements.txt"
+
+# Installing Specific Plugins for Metabolomics
+RUN /bin/bash -c ". activate qiime2 && pip install git+https://github.com/Wang-Bioinformatics-Lab/qiime2_normalization_plugin.git@d695201694191eb168942124bea1faca80f7ffc2"
+RUN /bin/bash -c ". activate qiime2 && pip install git+https://github.com/Wang-Bioinformatics-Lab/qiime2_imputation_plugin.git@edce69bce04cd653ec22b4ee0327af366a278106"
+RUN /bin/bash -c ". activate qiime2 && pip install git+https://github.com/Wang-Bioinformatics-Lab/qiime2_blank_removal_plugin.git@d9b947497530702b6f396e8918c8ce27055650f7"
+
+RUN /bin/bash -c ". activate qiime2 && pip install git+https://github.com/Wang-Bioinformatics-Lab/GNPSDataPackage.git@d1b78c4ee6555b96692fbf75683ea6a14e484062"
 
 COPY . /app
 WORKDIR /app

@@ -1,5 +1,5 @@
 version: '3'
 services:
-  template-streamlit:
+  qiime2-metabolomics-streamlit:
     ports:
     - "5000:5000"
