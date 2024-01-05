@@ -25,5 +25,8 @@ RUN /bin/bash -c ". activate qiime2 && pip install git+https://github.com/Wang-B
 
 RUN /bin/bash -c ". activate qiime2 && pip install git+https://github.com/Wang-Bioinformatics-Lab/GNPSDataPackage.git@d1b78c4ee6555b96692fbf75683ea6a14e484062"
 
+# Install unzip
+RUN apt-get update && apt-get install -y unzip
+
 COPY . /app
 WORKDIR /app
