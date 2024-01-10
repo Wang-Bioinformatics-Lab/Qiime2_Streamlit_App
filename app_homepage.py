@@ -190,6 +190,8 @@ if ret != 0:
 
 st.write("Permanova")
 
+with open(f'{data_root}/permanova.qzv', 'rb') as f:
+   st.download_button('Download permanova.qzv', f, file_name='permanova.qzv')
 
 # # Classified Data/Heatmap
 # metadata_column = 'ATTRIBUTE_Sample_Area'

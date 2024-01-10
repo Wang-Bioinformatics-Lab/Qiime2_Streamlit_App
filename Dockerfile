@@ -28,5 +28,8 @@ RUN /bin/bash -c ". activate qiime2 && pip install git+https://github.com/Wang-B
 # Install unzip
 RUN apt-get update && apt-get install -y unzip
 
+RUN /bin/bash -c ". activate qiime2 && pip install pandas==1.5.3"
+
+
 COPY . /app
 WORKDIR /app
